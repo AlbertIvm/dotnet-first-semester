@@ -21,9 +21,11 @@ namespace Lab1
 
         public string ToLongString(string format)
         {
-            return $"Coordinates: ({X:format}, {Y:format}), " +
-                   $"field value: ({Value.Real:format}, {Value.Imaginary:format}), " +
-                   $"field magnitude: {Value.Magnitude:format}";
+            return String.Format(
+                   $"Coordinates: ({X.ToString(format)}, {Y.ToString(format)}), " +
+                   $"field value: ({Value.Real.ToString(format)}, {Value.Imaginary.ToString(format)}), " +
+                   $"field magnitude: {Value.Magnitude.ToString(format)}"
+                   );
         }
 
         public override string ToString()
