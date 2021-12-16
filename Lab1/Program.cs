@@ -23,7 +23,7 @@ namespace Lab1
         {
             return $"Coordinates: ({X:format}, {Y:format}), " +
                    $"field value: ({Value.Real:format}, {Value.Imaginary:format}), " +
-                   $"field value magnitude: {Value.Magnitude:format}";
+                   $"field magnitude: {Value.Magnitude:format}";
         }
 
         public override string ToString()
@@ -96,9 +96,19 @@ namespace Lab1
             }
         }
 
+        public override string ToString()
+        {
+            return $"V1DataList with ID: {base.ID}, Timestamp: {base.Timestamp}, contains {Count} items";
+        }
+
         public override string ToLongString(string format)
         {
-            throw new NotImplementedException();
+            StringBuilder builder = new StringBuilder(ToString() + ":\n");
+            foreach (var item in Data)
+            {
+                builder.AppendLine(item.ToLongString(format));
+            }
+            return builder.ToString();
         }
     }
 
