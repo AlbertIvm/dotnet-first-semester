@@ -39,7 +39,7 @@ namespace Lab1
         }
     }
 
-    delegate Complex FbdlComplex(double x, double y);
+    public delegate Complex FbdlComplex(double x, double y);
 
     abstract class V1Data
     {
@@ -81,6 +81,23 @@ namespace Lab1
             }
             Data.Add(newItem);
             return true;
+        }
+
+        public int AddDefaults(int nItems, FbdlComplex F)
+        {
+            int addedCount = 0;
+            Random rand = new Random();
+            int boxMultiplier = 10; // Hardcoded here, can be made a property as well
+            for (int i = 0; i < nItems; i++)
+            {
+                // Points will be clustered around (0, 0),
+                // but can get arbitrarily far if there are many of them
+                var x = i * boxMultiplier * (-1 + 2 * rand.NextDouble());
+                var y = i * boxMultiplier * (-1 + 2 * rand.NextDouble());
+                var item = new DataItem(x, y, F(x, y));
+                addedCount += Convert.ToInt32(Add(item));
+            }
+            return addedCount;
         }
 
         public override int Count { get => Data.Count; }
