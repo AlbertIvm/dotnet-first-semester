@@ -5,4 +5,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="DataLibrary\**" />
+    <EmbeddedResource Remove="DataLibrary\**" />
+    <None Remove="DataLibrary\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="DataLibrary\DataLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -13,6 +13,11 @@ namespace DataLibrary
             Data = new List<DataItem>(nItems);
         }
 
+        public V1DataList(string id, DateTime timestamp, int nItems, FdblComplex f) : this(id, timestamp, nItems)
+        {
+            AddDefaults(nItems, f);
+        }
+
         public bool Add(DataItem newItem)
         {
             foreach (var item in Data)

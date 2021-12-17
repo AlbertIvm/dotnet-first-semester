@@ -5,7 +5,7 @@ namespace DataLibrary
 {
     public class V1MainCollection
     {
-        private List<V1Data> Data;
+        private readonly List<V1Data> Data = new();
 
         public int Count { get => Data.Count; }
 

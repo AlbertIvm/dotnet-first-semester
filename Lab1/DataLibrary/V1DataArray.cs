@@ -70,7 +70,7 @@ namespace DataLibrary
                 for (int j = 0; j < ColNumber; j++)
                 {
                     builder.AppendLine(
-                            $"({j * ColSpacing}, {i * RowSpacing}): " +
+                            $"({(j * ColSpacing).ToString(format)}, {(i * RowSpacing).ToString(format)}): " +
                             $"field value {Data[i, j].ToString(format)}, " +
                             $"field magnitude {Data[i, j].Magnitude.ToString(format)}");
                 }
@@ -88,7 +88,7 @@ namespace DataLibrary
             {
                 for (int j = 0; j < array.ColNumber; j++)
                 {
-                    result.Add(new DataItem(i * rowSpacing, j * colSpacing, array.Data[i, j]));
+                    result.Add(new DataItem(j * colSpacing, i * rowSpacing, array.Data[i, j]));
                 }
             }
             return result;
