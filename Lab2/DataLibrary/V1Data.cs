@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DataLibrary
 {
-    public abstract class V1Data
+    public abstract class V1Data : IEnumerable<DataItem>
     {
         public string ID { get; }
         public DateTime Timestamp { get; }
         public abstract int Count { get; }
         public abstract double AverageValue { get; }
         public abstract string ToLongString(string format);
+        public abstract IEnumerator<DataItem> GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public V1Data(string id, DateTime timestamp)
         {
@@ -20,5 +24,6 @@ namespace DataLibrary
         {
             return $"V1Data(DataItemID:{ID}, Timestamp:{Timestamp})";
         }
+
     }
 }

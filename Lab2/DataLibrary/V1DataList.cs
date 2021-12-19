@@ -78,5 +78,9 @@ namespace DataLibrary
             }
             return builder.ToString();
         }
+        public override IEnumerator<DataItem> GetEnumerator()
+        {
+            return Data.GetEnumerator();
+        }
     }
 }

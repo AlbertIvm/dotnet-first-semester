@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using System.Text;
+using System.Collections.Generic;
 
 namespace DataLibrary
 {
@@ -82,16 +83,24 @@ namespace DataLibrary
         {
             // Note: we're not initializing V1DataList.Count, we are just allocating memory
             V1DataList result = new(array.ID, array.Timestamp, array.Count);
-            double rowSpacing = array.RowSpacing;
-            double colSpacing = array.ColSpacing;
             for (int i = 0; i < array.RowNumber; i++)
             {
                 for (int j = 0; j < array.ColNumber; j++)
                 {
-                    result.Add(new DataItem(j * colSpacing, i * rowSpacing, array.Data[i, j]));
+                    result.Add(array.ItemInGrid(i, j));
                 }
             }
             return result;
+        }
+
+        public override IEnumerator<DataItem> GetEnumerator()
+        {
+            return new V1DataArrayEnumerator(this);
+        }
+
+        public DataItem ItemInGrid(int rowIndex, int colIndex)
+        {
+            return new DataItem(colIndex * ColSpacing, rowIndex * RowSpacing, Data[rowIndex, colIndex]);
         }
     }
 }
