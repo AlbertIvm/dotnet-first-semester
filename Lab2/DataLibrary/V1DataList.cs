@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace DataLibrary
 {
@@ -81,6 +83,36 @@ namespace DataLibrary
         public override IEnumerator<DataItem> GetEnumerator()
         {
             return Data.GetEnumerator();
+        }
+
+        public static bool SaveAsText(string filename, V1DataList v1)
+        {
+            try
+            {
+                string serialized = JsonSerializer.Serialize(v1);
+                File.WriteAllText(filename, serialized);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occurred during serialization: {ex}");
+                return false;
+            }
+        }
+
+        public static bool LoadAsText(string filename, ref V1DataList v1)
+        {
+            try
+            {
+                using FileStream fileStream = File.OpenRead(filename);
+                v1 = JsonSerializer.Deserialize<V1DataList>(fileStream);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occured during deserialization: {ex}");
+                return false;
+            }
         }
     }
 }
