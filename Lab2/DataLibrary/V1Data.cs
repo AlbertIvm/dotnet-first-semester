@@ -6,8 +6,8 @@ namespace DataLibrary
 {
     public abstract class V1Data : IEnumerable<DataItem>
     {
-        public string ID { get; }
-        public DateTime Timestamp { get; }
+        public string ID { get; protected set; }
+        public DateTime Timestamp { get; protected set; }
         public abstract int Count { get; }
         public abstract double AverageValue { get; }
         public abstract string ToLongString(string format);

@@ -7,12 +7,11 @@ namespace DataLibrary
 {
     public class V1DataArray : V1Data
     {
-        public int RowNumber { get; }
-        public int ColNumber { get; }
-        public double RowSpacing { get; }
-        public double ColSpacing { get; }
-
-        public Complex[,] Data { get; }
+        public int RowNumber { get; private set; }
+        public int ColNumber { get; private set; }
+        public double RowSpacing { get; private set; }
+        public double ColSpacing { get; private set; }
+        public Complex[,] Data { get; private set; }
 
         public V1DataArray(string id, DateTime timestamp) : base(id, timestamp)
         {
