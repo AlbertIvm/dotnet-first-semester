@@ -2,9 +2,12 @@
 using System.Numerics;
 using System.Text;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DataLibrary
 {
+    [Serializable]
     public class V1DataArray : V1Data
     {
         public int RowNumber { get; private set; }
@@ -100,6 +103,38 @@ namespace DataLibrary
         public DataItem ItemInGrid(int rowIndex, int colIndex)
         {
             return new DataItem(colIndex * ColSpacing, rowIndex * RowSpacing, Data[rowIndex, colIndex]);
+        }
+
+        public static bool SaveBinary(string filename, V1DataArray v1)
+        {
+            try
+            {
+                using FileStream fileStream = File.Create(filename);
+                BinaryFormatter formatter = new();
+                formatter.Serialize(fileStream, v1);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occured during serialization: {ex}");
+                return false;
+            }
+        }
+
+        public static bool LoadBinary(string filename, ref V1DataArray v1)
+        {
+            try
+            {
+                using FileStream fileStream = File.OpenRead(filename);
+                BinaryFormatter formatter = new();
+                v1 = formatter.Deserialize(fileStream) as V1DataArray;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception occured during deserialization: {ex}");
+                return false;
+            }
         }
     }
 }
