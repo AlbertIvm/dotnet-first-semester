@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DataLibrary
@@ -54,6 +56,55 @@ namespace DataLibrary
                 builder.AppendLine(item.ToString());
             }
             return builder.ToString();
+        }
+
+        public double AverageMagnitude
+        {
+            get
+            {
+                if (Data.Sum(col => col.Count) == 0)
+                {
+                    return double.NaN;
+                }
+
+                return (from col in Data
+                        from item in col
+                        select item.Magnitude).Average();
+            }
+        }
+
+        public DataItem? MostDeviated
+        {
+            get
+            {
+                double average = AverageMagnitude;
+                if (Double.IsNaN(average))
+                {
+                    return null;
+                }
+
+                return (from col in Data
+                        from item in col
+                        orderby Math.Abs(item.Magnitude - average) descending
+                        select item).First();
+            }
+        }
+
+        public IEnumerable<float> CommonXCoords
+        {
+            get
+            {
+                if (Count == 0)
+                {
+                    return null;
+                }
+
+                return (from col in Data
+                        from item in col
+                        group item.X by item.X into x_group
+                        where x_group.Count() >= 2
+                        select (float) x_group.Key);
+            }
         }
     }
 }
