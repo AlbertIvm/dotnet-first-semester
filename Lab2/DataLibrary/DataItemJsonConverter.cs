@@ -28,8 +28,8 @@ namespace DataLibrary
             double y = 0;
             double real = 0;
             double imag = 0;
-
             string propertyName = "";
+            
             while (reader.Read())
             {
                 if (reader.TokenType == JsonTokenType.EndObject)

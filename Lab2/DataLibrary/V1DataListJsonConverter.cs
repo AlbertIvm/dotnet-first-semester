@@ -41,6 +41,7 @@ namespace DataLibrary
             string propertyName = "";
             bool readingData = false;
             bool readingItem = false;
+
             while (reader.Read())
             {
                 switch (reader.TokenType)
