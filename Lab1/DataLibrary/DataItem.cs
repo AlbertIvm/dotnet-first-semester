@@ -19,11 +19,9 @@ namespace DataLibrary
 
         public string ToLongString(string format)
         {
-            return string.Format(
-                   $"Coordinates: ({X.ToString(format)}, {Y.ToString(format)}), " +
+            return $"Coordinates: ({X.ToString(format)}, {Y.ToString(format)}), " +
                    $"field value: ({Value.Real.ToString(format)}, {Value.Imaginary.ToString(format)}), " +
-                   $"field magnitude: {Value.Magnitude.ToString(format)}"
-                   );
+                   $"field magnitude: {Value.Magnitude.ToString(format)}";
         }
 
         public override string ToString()
