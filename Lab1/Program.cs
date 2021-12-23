@@ -35,14 +35,11 @@ namespace Lab1
             collection.Add(new V1DataList("List_1", timestamp: DateTime.Now, 4, Field.FieldFacingInfinity));
             collection.Add(new V1DataList("List_2", timestamp: DateTime.Now, 4, Field.FieldFacingInfinity));
 
-            for (int i = 0; i < collection.Count; i++)
-            {
-                Console.WriteLine(collection[i].ToLongString("F3"));
-            }
+            Console.WriteLine(collection.ToLongString("F3"));
 
             for (int i = 0; i < collection.Count; i++)
             {
-                Console.WriteLine($"{collection[i]}, count: {collection[i].Count}, average value: {collection[i].AverageValue}");
+                Console.WriteLine($"Collection with id {collection[i].ID}, count: {collection[i].Count}, average value: {collection[i].AverageValue}");
             }
         }
     }

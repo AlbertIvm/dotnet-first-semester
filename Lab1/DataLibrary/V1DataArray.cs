@@ -33,7 +33,7 @@ namespace DataLibrary
             {
                 for (int j = 0; j < colNumber; j++)
                 {
-                    Data[i, j] = f(i * colSpacing, j * rowSpacing);
+                    Data[i, j] = f(j * colSpacing, i * rowSpacing);
                 }
             }
         }
