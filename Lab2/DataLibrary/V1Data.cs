@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace DataLibrary
 {
+    [Serializable]
     public abstract class V1Data : IEnumerable<DataItem>
     {
         public string ID { get; protected set; }

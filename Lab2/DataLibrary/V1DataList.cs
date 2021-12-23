@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DataLibrary
 {
+    [JsonConverter(typeof(V1DataListJsonConverter))]
     public class V1DataList : V1Data
     {
         public List<DataItem> Data { get; }
@@ -13,6 +15,11 @@ namespace DataLibrary
         public V1DataList(string id, DateTime timestamp, int nItems = 5) : base(id, timestamp)
         {
             Data = new List<DataItem>(nItems);
+        }
+
+        public V1DataList(string id, DateTime timestamp, in List<DataItem> list) : base(id, timestamp)
+        {
+            Data = list;
         }
 
         public V1DataList(string id, DateTime timestamp, int nItems, FdblComplex f) : this(id, timestamp, nItems)
@@ -89,7 +96,7 @@ namespace DataLibrary
         {
             try
             {
-                string serialized = JsonSerializer.Serialize(v1);
+                string serialized = JsonSerializer.Serialize<V1DataList>(v1);
                 File.WriteAllText(filename, serialized);
                 return true;
             }

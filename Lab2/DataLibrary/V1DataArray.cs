@@ -132,7 +132,7 @@ namespace DataLibrary
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception occured during deserialization: {ex}");
+                Console.WriteLine($"Exception occurred during deserialization: {ex}");
                 return false;
             }
         }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Numerics;
+using System.Text.Json.Serialization;
 
 namespace DataLibrary
 {
+    [JsonConverter(typeof(DataItemJsonConverter))]
     public struct DataItem
     {
         public double X { get; set; }
